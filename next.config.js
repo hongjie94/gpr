@@ -7,7 +7,7 @@ const nextConfig = {
         hostname: 'static.lolesports.com',
       },
     ],
-  },
+  }
 }
 
 module.exports = nextConfig

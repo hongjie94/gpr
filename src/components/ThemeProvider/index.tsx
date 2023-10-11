@@ -5,7 +5,9 @@ import { ThemeProvider as NextThemesProvider } from "next-themes"
 import { ThemeProviderProviderComponent } from "./types";
 
 export const ThemeProvider: ThemeProviderProviderComponent = ({ children, ...props }) => {
-  return <NextThemesProvider {...props}>
-    {children}
-  </NextThemesProvider>
+  return( 
+    <NextThemesProvider {...props}>
+      {children}
+    </NextThemesProvider>
+  )
 }

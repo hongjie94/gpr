@@ -1,12 +1,9 @@
-
-
+import Image from "next/image";
+import heroBg from "@/img/bb.jpeg";
+import Loading from "./loading";
 export default async function Home() {
   return (
-    <div className="p-5">
-      <div>
-        <div className="m-20 grid gap-12 lg:px-8 grid-cols-4">
-        </div>
-      </div>
-    </div>
+    <main className="p-12">
+    </main>
   );
 }

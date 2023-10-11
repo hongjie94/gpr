@@ -1,0 +1,55 @@
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
+
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model leagues {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  league_id String @unique 
+  name            String
+  slug            String
+  sport           String
+  image           String
+  lightImage      String
+  darkImage       String
+  region          String
+  priority        Int
+  displayPriority Json
+  tournaments     Json
+}
+
+model players {
+  id           String @id @default(auto()) @map("_id") @db.ObjectId
+  player_id    String @unique 
+  handle       String
+  first_name   String
+  last_name    String
+  home_team_id String?
+}
+
+model teams {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  team_id String @unique
+  name    String
+  acronym String
+  slug    String
+}
+
+model tournaments {
+  id            String @id @default(auto()) @map("_id") @db.ObjectId
+  tournament_id String @unique
+  leagueId      String
+  name          String
+  slug          String
+  sport         String
+  startDate     String
+  endDate       String
+  stages        Json
+}
