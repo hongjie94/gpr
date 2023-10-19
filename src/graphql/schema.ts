@@ -1,4 +1,3 @@
-import { Tournament } from '../app/tournament/type';
 export const typeDefs = `#graphql
   type _TournamentIds {
     id: String
@@ -10,7 +9,7 @@ export const typeDefs = `#graphql
 
   type League {
     id: String  
-    league_id: String
+    league_id: String!
     name: String
     slug: String
     sport: String
@@ -26,7 +25,7 @@ export const typeDefs = `#graphql
 
   type Player {
     id: String  
-    player_id: String
+    player_id: String!
     handle: String
     first_name: String
     last_name: String
@@ -54,15 +53,17 @@ export const typeDefs = `#graphql
     outcome: String
     gameWins: Int
   } 
+  
   type _Players {
     id: String
     role: String
   }
+
   type _Teams {
     id: String
     side: String
     record: _Record
-    results: _Results 
+    result: _Results
     players: [_Players]
   }
 
@@ -78,7 +79,7 @@ export const typeDefs = `#graphql
   type _GamesTeams {
     id: String
     side: String
-    results: _GamesTeamsResults
+    result: _GamesTeamsResults
   }
 
   type _Games{
@@ -117,29 +118,42 @@ export const typeDefs = `#graphql
   }
 
   type Tournament {
-    id: String 
+    id: String!
     tournament_id: String
-    leagueId: String 
-    name: String 
+    leagueId: String
+    name: String
     slug: String
     sport: String
     startDate: String
     endDate: String
     stages: [Stages]
   }
-  
+
+  type _Game_team {
+    id: String
+    side: String
+    result: String
+  }
+
+  type Game {
+    id: String!
+    game_id: String
+    teams: [_Game_team]
+  }
+
   type Query {
     leagues: [League]
     league(league_id: String):League
-    matches(team_id: String):_Matches
+
+    tournaments(take: Int, skip: Int, year: Int): [Tournament]
+    tournament(tournament_id: String!): Tournament
+
+    games(team_id: String): [Game]
     
     teams(take: Int, skip: Int): [Team]
     team(team_id: String): Team
 
     players: [Player]
     player(player_id: String): Player
-
-    tournaments(take: Int, skip: Int): [Tournament]
-    tournament(tournament_id: String): Tournament
   }
 `;

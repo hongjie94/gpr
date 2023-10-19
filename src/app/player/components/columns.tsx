@@ -14,6 +14,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
+// Define columns for the data table
 export const columns: ColumnDef<Player>[] = [
   {
     accessorKey: "handle",
@@ -70,7 +71,7 @@ export const columns: ColumnDef<Player>[] = [
         });
 
         const team:Team =
-          data && data.team ? data.team : { name: "None", acronym: "None" };
+          data && data.team ? data.team : { name: "", acronym: "" };
         return { teamName: team.name, acronym: team.acronym, loading };
       };
 
@@ -87,7 +88,7 @@ export const columns: ColumnDef<Player>[] = [
                     <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
                   </>
                 ) : (
-                <p className={team.acronym !== "None" ? "hover:underline hover:underline-offset-4" : ""}>{team.acronym}</p>
+                <p className="hover:underline hover:underline-offset-4">{team.acronym}</p>
                 )}
               </TooltipTrigger>
              { team.teamName != "None" && <TooltipContent>

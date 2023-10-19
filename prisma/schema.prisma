@@ -1,8 +1,5 @@
-
 generator client {
   provider = "prisma-client-js"
-  previewFeatures = ["fullTextSearch"]
-
 }
 
 datasource db {
@@ -10,9 +7,23 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+type teams_teams {
+  id String
+  side String
+  result String
+}
+
+model games{
+  id String @id @map("_id") @db.ObjectId
+  game_id  String @unique
+  teams teams_teams []
+}
+
+
+
 model leagues {
-  id        String @id @default(auto()) @map("_id") @db.ObjectId
-  league_id String @unique 
+  id              String @id @map("_id") @db.ObjectId
+  league_id        String @unique
   name            String
   slug            String
   sport           String
@@ -26,25 +37,25 @@ model leagues {
 }
 
 model players {
-  id           String @id @default(auto()) @map("_id") @db.ObjectId
-  player_id    String @unique 
-  handle       String
-  first_name   String
-  last_name    String
+  id         String  @id @map("_id") @db.ObjectId
+  player_id   String  @unique
+  handle     String
+  first_name  String
+  last_name   String
   home_team_id String?
 }
 
 model teams {
-  id      String @id @default(auto()) @map("_id") @db.ObjectId
-  team_id String @unique
+  id      String @id @map("_id") @db.ObjectId
+  team_id  String @unique
   name    String
   acronym String
   slug    String
 }
 
 model tournaments {
-  id            String @id @default(auto()) @map("_id") @db.ObjectId
-  tournament_id String @unique
+  id            String   @id @map("_id") @db.ObjectId
+  tournament_id String   @unique
   leagueId      String
   name          String
   slug          String

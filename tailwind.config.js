@@ -17,6 +17,9 @@ module.exports = {
       },
     },
     extend: {
+      colors: {
+        golden: '#FFD700',
+      },
       keyframes: {
         "accordion-down": {
           from: { height: 0 },
@@ -32,7 +35,9 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       backgroundImage: {
-        'hero-background': "url('../img/bb.jpeg')",
+        'hero-background': "url('../img/b2.jpeg')",
+        'red-team-background': "url('../img/red_team.jpeg')",
+        'blue-team-background': "url('../img/blue_team.jpeg')",
       },
     },
   },

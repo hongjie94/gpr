@@ -35,8 +35,8 @@ export const GET_LEAGUE = gql`
 `;
 
 export const GET_TOURNAMENTS = gql`
-  query Tournaments($take: Int, $skip: Int) {
-    tournaments(take: $take, skip: $skip) {
+  query Tournaments($take: Int, $skip: Int, $year: Int) {
+    tournaments(take: $take, skip: $skip, year: $year) {
       name
       leagueId
       startDate
@@ -46,37 +46,35 @@ export const GET_TOURNAMENTS = gql`
 }
 `;
 
+export const GET_GAMES_TEAMS = gql`
+  query GameTeams($team_id: String) {
+    games(team_id: $team_id) {
+      teams {
+        result
+        id
+        side
+      }
+      game_id
+    }
+}`
+;
+
 export const GET_TOURNAMENT = gql`
- query Tournament($id: String) {
-  tournament(tournament_id: $id) {
+ query Tournament($tournament_id: String!) {
+  tournament(tournament_id: $tournament_id) {
     name
     leagueId
     stages {
       name
       sections {
         matches {
-          games {
-            id
-            number
-            state
-            teams {
-              id
-              results {
-                outcome
-              }
-              side
-            }
-          }
           id
           mode
           state
-          strategy {
-            count
-            type
-          }
           teams {
+            id
             side
-            results {
+            result {
               outcome
               gameWins
             }
@@ -89,9 +87,20 @@ export const GET_TOURNAMENT = gql`
               id
               role
             }
-            id
           }
           type
+          games{
+            id
+            state
+            number
+            teams {
+              id
+              side
+              result{
+                outcome
+              }
+            }
+          }
         }
         name
         rankings {
@@ -107,7 +116,7 @@ export const GET_TOURNAMENT = gql`
               losses
               wins
             }
-            results {
+            result {
               outcome
               gameWins
             }
@@ -134,9 +143,11 @@ export const GET_PLAYERS= gql`
 }
 `;
 
+
 export const GET_TEAMS= gql`
 query Teams($take: Int, $skip: Int) {
   teams(take: $take, skip: $skip) {
+    team_id
     name
     acronym
     players {
@@ -146,7 +157,6 @@ query Teams($take: Int, $skip: Int) {
     }
   }
 }
-
 `;
 
 export const GET_TEAM= gql`
@@ -155,6 +165,20 @@ export const GET_TEAM= gql`
     team_id
     name
     acronym
+  }
+}
+`;
+
+export const GET_TOURNAMENT_TEAMS= gql`
+ query TournamentTeams {
+  teams {
+    team_id
+    name
+    acronym
+  }
+  players {
+    player_id
+    handle
   }
 }
 `;

@@ -6,20 +6,22 @@ import { GET_TOURNAMENTS } from "../../graphql/queries"; // Import the Tournamen
 import LeagueImage from "./LeagueImage";
 import { Button } from "@/components/ui/button";
 import { ReloadIcon } from "@radix-ui/react-icons";
-import { Tournament } from "./type";
+import { TournamentListComponent, TournamentType } from "./type";
 import { Card, CardDescription, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
+import { formatText } from "@/lib/utils";
 
-const TournamentList = () => {
-  const [tournamentList, setTournamentList] = useState<Tournament[]>([]);
+const TournamentList: TournamentListComponent = ({ year, count }) => {
+  const [tournamentList, setTournamentList] = useState<TournamentType[]>([]);
 
   // Number tournament card per page (pagination)
   const [take] = useState(12);
   const [skip, setSkip] = useState(0);
 
   const { data, loading } = useQuery(GET_TOURNAMENTS, {
-    variables: { take, skip },
+    variables: { take, skip, year },
   });
+
   useEffect(() => {
     if (!loading && data && data.tournaments) {
       setTournamentList((prevTournamentList) => [
@@ -37,9 +39,9 @@ const TournamentList = () => {
 
   return (
     <>
-      {tournamentList.map((tournament) => (
+      {tournamentList.map((tournament, index) => (
         <Link
-          key={tournament.tournament_id}
+          key={index}
           href={`/tournament/${tournament.tournament_id}`}
           className="transition-transform transform hover:cursor-pointer hover:scale-105"
         >
@@ -49,7 +51,9 @@ const TournamentList = () => {
           >
             <LeagueImage id={tournament.leagueId} />
             <CardTitle className="text-xl font-semibold my-2">
-              {tournament.name}
+              {tournament.name.includes("_")
+                ? formatText(tournament.name)
+                : tournament.name}
             </CardTitle>
             <CardDescription className="text-sm mb-2">
               Start Date: {tournament.startDate}
@@ -60,22 +64,32 @@ const TournamentList = () => {
           </Card>
         </Link>
       ))}
-      <div className="w-100 flex justify-center mb-24 col-span-1 md:col-span-2 lg:col-span-2 xl:col-span-3 mt-2">
-        <Button
-          onClick={loadMoreTournaments}
-          variant={loading ? null : "outline"}
-          disabled={loading}
-        >
-          {loading ? (
-            <>
-              <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
-              Please wait
-            </>
-          ) : (
-            "Load More"
-          )}
-        </Button>
-      </div>
+
+      {!loading && (
+        <div className="text-muted col-span-1 md:col-span-2 lg:col-span-2 xl:col-span-3 flex justify-center">
+          {tournamentList.length > count ? count : tournamentList.length} of{" "}
+          {count}
+        </div>
+      )}
+
+      {tournamentList.length < count && (
+        <div className="w-100 flex justify-center mt-2 col-span-1 md:col-span-2 lg:col-span-2 xl:col-span-3">
+          <Button
+            onClick={loadMoreTournaments}
+            variant={loading ? null : "outline"}
+            disabled={loading}
+          >
+            {loading ? (
+              <>
+                <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+                Please wait
+              </>
+            ) : (
+              "Load More"
+            )}
+          </Button>
+        </div>
+      )}
     </>
   );
 };

@@ -5,10 +5,10 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { ApolloProvider } from "@/components/ApolloProvider";
 import Nav from "@/components/NavBar";
 import Footer from "@/components/Footer/index";
-import ScrollToTopButton from '@/components/ui/ScrollToTopButton';
+import ScrollToTopButton from '@/components/ui/scrollToTopButton';
 
 export const metadata: Metadata = {
-  title: "Esports Mastery",
+  title: "League of Legends Hub",
   description: "2013 Global Power Rankings",
 };
 
@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <>
       <html lang="en" suppressHydrationWarning>
-        <body>
+        <body className="font-sans" suppressHydrationWarning>
           <ApolloProvider>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
               <Nav />

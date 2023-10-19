@@ -1,25 +1,17 @@
 "use client";
 
-import {TournamentsComponent} from "../type"
+import { TournamentsComponent } from "../type";
 import Link from "next/link";
-import {
-  Card,
-  CardDescription,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardDescription, CardTitle } from "@/components/ui/card";
 
+import { formatText } from "@/lib/utils";
 
-const Tournaments:TournamentsComponent  = ({tournaments}) => {
-  function formatText(originalText: string): string {
-    return originalText
-      .split("_")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
-  }
-
+// Define the Tournaments component using the TournamentsComponent type
+const Tournaments: TournamentsComponent = ({ tournaments }) => {
+  // Check if there are no tournaments available
   if (tournaments.length === 0) {
     return (
-      <div className="p-6 text-center text-stone-500 dark:text-stone-400">
+      <div className="p-6 text-center text-muted">
         <h1 className="text-2xl font-semibold mb-4">
           No Tournaments Available
         </h1>
@@ -39,13 +31,17 @@ const Tournaments:TournamentsComponent  = ({tournaments}) => {
             className="transition-transform transform hover:cursor-pointer hover:scale-105"
           >
             <Card className="bg-gradient-to-b dark:from-stone-950 dark:to-zinc-900 bg-zinc-100  py-12 mt-2 p-6">
-            <CardTitle className="text-xl font-semibold mb-2 line-clamp-1">
-              {tournament.name.includes("_")
-                ? formatText(tournament.name)
-                : tournament.name}
-            </CardTitle>
-            <CardDescription className="text-sm mb-2">Start Date: {tournament.startDate}</CardDescription>
-            <CardDescription className="text-sm">End Date: {tournament.endDate}</CardDescription>
+              <CardTitle className="text-xl font-semibold mb-2 line-clamp-1">
+                {tournament.name.includes("_")
+                  ? formatText(tournament.name)
+                  : tournament.name}
+              </CardTitle>
+              <CardDescription className="text-sm mb-2">
+                Start Date: {tournament.startDate}
+              </CardDescription>
+              <CardDescription className="text-sm">
+                End Date: {tournament.endDate}
+              </CardDescription>
             </Card>
           </Link>
         ))}

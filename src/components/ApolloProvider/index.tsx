@@ -1,16 +1,15 @@
-"use client"
+"use client";
 
-import { ApolloClient, InMemoryCache, ApolloProvider as Provider } from '@apollo/client';
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider as Provider,
+} from "@apollo/client";
 
-export const ApolloProvider = ({children}: {children: React.ReactNode}) => {
-  const originUrl = window.location.origin;
+export const ApolloProvider = ({ children }: { children: React.ReactNode }) => {
   const client = new ApolloClient({
-    uri: `${originUrl}/api/graphql/`,
+    uri: `/api/graphql/`,
     cache: new InMemoryCache(),
   });
-  return (
-      <Provider client={client}>
-        {children}
-      </Provider>
-  )
-}
+  return <Provider client={client}>{children}</Provider>;
+};

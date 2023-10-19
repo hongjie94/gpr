@@ -13,6 +13,13 @@ interface ImageSwitcherProps {
   height: number;
   style: string;
 }
+interface IconSwitcherProps {
+  data: {
+    name: string;
+    lightImage: string;
+    darkImage: string;
+  }
+}
 
 const ImageSwitcher: React.FC<ImageSwitcherProps> = ({
   data,
@@ -34,7 +41,7 @@ const ImageSwitcher: React.FC<ImageSwitcherProps> = ({
   );
 };
 
-const IconSwitcher: React.FC<ImageSwitcherProps> = ({ data }) => {
+const IconSwitcher: React.FC<IconSwitcherProps> = ({ data }) => {
   const theme = useTheme();
 
   return (

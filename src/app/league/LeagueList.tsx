@@ -7,25 +7,33 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-
 import Link from "next/link";
 import {ImageSwitcher} from "@/components/ui/image-switcher";
+import LeagueListLoader from "./LeagueListLoader";
+
 import { GET_LEAGUES } from "../../graphql/queries";
 import { useQuery } from "@apollo/client";
 import { useMemo } from "react";
-import PageLoader from "./PageLoader";
+import {leaguesListSchema} from  "./type"
+import { z } from "zod";
 
 const LeagueList = () => {
+
+  // Fetch league data and Create a memoized variable for leagues
   const { data, loading } = useQuery(GET_LEAGUES);
   const leagues = useMemo(() => data?.leagues, [data]);
 
-  if (loading && !leagues) return <PageLoader />;
-   
+  // Loading spinner for loading data
+  if (loading && !leagues) return <LeagueListLoader />;
+
+  // Parse Zod 
+  const zLeagues = z.array(leaguesListSchema).parse(leagues)
+
   return (
     <>
-      {leagues && leagues.map((data: any) => (
+      {zLeagues && zLeagues.map((data) => (
         <Link
-          key={data.id}
+          key={data.league_id}
           className="col-span-4 xl:col-span-1 md:col-span-2"
           href={`/league/${data.league_id}`}
         >

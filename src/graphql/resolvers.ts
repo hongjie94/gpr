@@ -1,4 +1,3 @@
-import { Tournament } from './../app/tournament/type';
 import { Context } from "@/app/api/graphql/route";
 
 export const resolvers = {
@@ -11,6 +10,7 @@ export const resolvers = {
         },
       });
     },
+
     league: async (parent: any, args: any, context: Context) => {
       return await context.prisma.leagues.findUnique({
         where: {
@@ -19,49 +19,75 @@ export const resolvers = {
       });
     },
 
+    games: async (parent: any, args: any, context: Context) => {
+      return await context.prisma.games.findMany({
+        where: {
+          teams: {
+            some: {
+              id: args.team_id
+            }
+          },
+        },
+      });
+    },
+
     // Tournaments & Tournament
     tournaments: async (parent: any, args: any, context: Context) => {
+      let lte: string = "";
+      let gte: string = "";
+
+      // Define date ranges for each year
+      const yearDateRanges: Record<number, { lte: string; gte: string }> = {
+        2020: { lte: "2020-12-31", gte: "2020-01-01" },
+        2021: { lte: "2021-12-31", gte: "2021-01-01" },
+        2022: { lte: "2022-12-31", gte: "2022-01-01" },
+        2023: { lte: "2023-12-31", gte: "2023-01-01" },
+      };
+      let filteredDate = yearDateRanges[args.year] || { lte, gte };
       return await context.prisma.tournaments.findMany({
         take: args.take,
         skip: args.skip,
+        where: {
+          startDate: filteredDate
+        },
         orderBy: {
           startDate: "desc",
         }
-      });
+      })
     },
+
     tournament: async (parent: any, args: any, context: Context) => {
-      return await context.prisma.tournaments.findFirst({
+      return await context.prisma.tournaments.findUnique({
         where: {
-          tournament_id: args.tournament_id
+          tournament_id: args.tournament_id,
         }
-      });
+      })
     },
+
 
     // Teams & Team
     teams: async (parent: any, args: any, context: Context) => {
       return await context.prisma.teams.findMany({
         take: args.take,
         skip: args.skip,
-        orderBy: {
-          name: "asc",
-        }
+
       });
     },
 
     team: async (parent: any, args: any, context: Context) => {
-      return await context.prisma.teams.findFirst({
+      return await context.prisma.teams.findUnique({
         where: {
           team_id: args.team_id
         }
       });
     },
 
-    // Players & Player
+    // Players & Player 110848560874526298
     players: async (parent: any, args: any, context: Context) => {
       return await context.prisma.players.findMany();
     },
     player: async (parent: any, args: any, context: Context) => {
-      return await context.prisma.players.findFirst({
+      return await context.prisma.players.findUnique({
         where: {
           player_id: args.player_id
         }
@@ -82,9 +108,10 @@ export const resolvers = {
       });
     }
   },
+
   Player: {
     PlayerTeam: async (parent: any, args: any, context: Context) => {
-      return await context.prisma.teams.findMany({
+      return await context.prisma.teams.findUnique({
         where: {
           team_id: parent.home_team_id,
         },
@@ -99,29 +126,5 @@ export const resolvers = {
         },
       });
     },
-    tournaments: async (parent: any, args: any, context: Context) => {
-      const teamId = parent.team_id;
-      const tournaments = await context.prisma.tournaments.findMany({
-        select: {
-          name: true,
-          stages: true
-        },
-      });
-      
-      
-      tournaments.filter((tournament)=> {
-        tournament.filter((tournament.stages) => {
-          stage.
-        })
-      })
-      // Checks whether an element is even
-    
-      // Expected output: true
-      
-      console.log(teamId);
-
-      // return tournaments// console.log(tournaments)
-    },
-    
-  }
+  },
 };

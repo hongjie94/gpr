@@ -1,65 +1,86 @@
-"use client" 
+"use client";
 
 import { ModeToggle } from "@/components/ui/mode-toggle";
 import { Menu } from "lucide-react";
 import Link from "next/link";
 import { Toggle } from "@/components/ui/toggle";
-import { usePathname } from 'next/navigation'
-import Image from 'next/image';
-import logoIcon from '@/img/logo.svg'
+import { usePathname } from "next/navigation";
+import Image from "next/image";
+import logoIcon from "@/img/logo.svg";
+import { useState } from "react";
 
 type Links = {
   href: string;
   text: string;
-}
+};
 
 const Nav = () => {
-  const pathname = usePathname()
+  const pathname = usePathname();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false); // Create state for mobile menu
 
-  const links: Links[]  = [
-    { href: "/league", text: "Leagues"},
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen); // Toggle mobile menu state
+  };
+
+  const links: Links[] = [
+    { href: "/league", text: "Leagues" },
     { href: "/tournament", text: "Tournaments" },
     { href: "/team", text: "Teams" },
     { href: "/player", text: "Players" },
   ];
-  
+
   return (
-    <nav className="sticky top-0 z-50 flex items-center justify-between py-3 lg:px-16 shadow-lg dark:bg-stone-950 bg-zinc-100">
+    <nav className="sticky top-0 z-20 flex items-center justify-between py-3 lg:px-16 shadow-lg dark:bg-stone-950 bg-zinc-100">
       <div className="flex lg:flex-1">
-        <Link href="/" className="-m-1.5 p-1.5 ">
-        <Image
-          width= "60"
-          height="60"
-          className="bg-zinc-950 ml-3 rounded-full"
-          quality={100}
-          src={logoIcon}
-          alt="logo image"
-        />
+        <Link href="/" >
+          <Image
+            width="60"
+            height="60"
+            className="bg-zinc-950 ml-3 rounded-full"
+            quality={100}
+            src={logoIcon}
+            alt="logo image"
+          />
         </Link>
       </div>
-      <div className="flex lg:hidden">
-        <Toggle aria-label="Toggle italic">
-          <Menu />
-        </Toggle>
-      </div>
-      <div className="hidden lg:flex lg:gap-x-8">
-        
+    
+      <div
+        className={`lg:flex lg:flex-row lg:gap-x-8 lg:mt-0 lg:static lg:w-auto lg:border-0  duration-200 transition-all 
+        absolute w-screen flex-col top-0 right-0 mt-20 dark:bg-stone-950 bg-zinc-100 text-center border-t
+          ${mobileMenuOpen ? "flex " : "hidden"} 
+        `}
+      >
         {links.map((link, index) => (
           <Link
+            onClick={()=>setMobileMenuOpen(false)}
             key={index}
             href={link.href}
-            className={`transition duration-30 dark:hover:bg-zinc-800 dark:active:bg-zinc-950 dark:active:text-white px-4 py-2 rounded-md ${
-              pathname === link.href ? 'dark:bg-zinc-800 bg-zinc-200' : ''
+            className={`transition duration-30 dark:hover:bg-zinc-800 dark:active:bg-zinc-950 dark:active:text-white px-4 lg:py-2 py-10 rounded-md ${
+              pathname === link.href ? "dark:bg-zinc-800 bg-zinc-200" : "" 
             }`}
           >
             {link.text}
           </Link>
         ))}
       </div>
-      <div className="hidden lg:flex lg:flex-1 lg:justify-end items-center">
-        <Link className="px-5 transition duration-30 hover:underline" target="_blank" href="http://localhost:3000/api/graphql/"> Api</Link>
+
+      <div className="flex flex-1 justify-end items-center px-2">
+        <Link
+          className="px-5 transition duration-30 hover:underline"
+          target="_blank"
+          href="/api/graphql/"
+        >
+          Api
+        </Link>
         <ModeToggle />
       </div>
+
+      <div className="flex lg:hidden px-2">
+        <Toggle aria-label="Toggle italic" onClick={toggleMobileMenu}>
+          <Menu />
+        </Toggle>
+      </div>
+
     </nav>
   );
 };

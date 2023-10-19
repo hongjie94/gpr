@@ -74,7 +74,7 @@ export default function FooterDemo() {
 
   return (
     <>
-      <footer className="dark:bg-stone-950 bg-zinc-100 shadow-lg p-0">
+      <footer className="dark:bg-stone-950 bg-zinc-100 shadow-lg p-0 z-10 relative">
         <div
           className="
           container
@@ -89,14 +89,14 @@ export default function FooterDemo() {
           lg:flex-nowrap"
         >
           <div className="flex-shrink-0 w-80 mx-auto text-center md:mx-0 md:text-left">
-            <Link href={"/"} className="text-2xl">
-              Esports Mastery
+            <Link href={"/"} className="text-2xl font-bold">
+              League of Legends Hub
             </Link>
             <p className="mt-2 text-xs text-justify">
-              Footer is a valuable resource that complements the main content of
-              the website by providing quick links, legal information, and ways
-              to connect, creating a well-rounded and user-friendly experience
-              for visitors.
+            League of Legends Hub a comprehensive platform dedicated to showcasing the 
+              world of competitive gaming. It offers
+               information about LoL players, teams, 
+               in-depth statistics, and a comprehensive catalog of tournaments
             </p>
             <div className="flex my-4 w-full max-w-sm items-center space-x-2">
               <Input type="email" placeholder="Email" />
@@ -141,7 +141,7 @@ export default function FooterDemo() {
         </div>
         <div className="flex justify-center">
           <p className="text-center pb-6">
-            @2024 All rights reserved by Esports Mastery.
+            @2024 All rights reserved by League of Legends Hub.
           </p>
         </div>
       </footer>

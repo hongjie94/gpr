@@ -2,32 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer components {
   .text-muted {
     @apply dark:text-stone-500 text-stone-400;
   }
 }
 
-
-.goldText {
-  color: transparent; 
-  position: absolute;
-  transform: translate(-50%, -50%); 
-  top: 50%;
-  Left: 50%;
-  font-size: 150px;
-  font-family: 'Times New Roman', serif;
-  Letter-spacing: 5px; font-weight: bold;
+.goldWrapper {
+  padding: 0;
+  margin: 0;
+  background-color: #0b1826;
+}
+.gold {
+  letter-spacing: 5px;
+  font-weight: bold;
   background-image: linear-gradient(
     to right,
-    #462523 0, 
-    #cb9b51 22%, 
-    #f6e27a 45%, 
-    #f6f2c0 50%, 
-    #f6e27a 55%, 
+    #462523 0,
+    #cb9b51 22%,
+    #f6e27a 45%,
+    #f6f2c0 50%,
+    #f6e27a 55%,
     #cb9b51 78%,
     #462523 100%
   );
-  -webkit-background-clip:text;
+  color: transparent;
+  -webkit-background-clip: text;
+}
+
+.absoluteCenter {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+
+
+@media screen and (max-width: 775px) {
+  .absoluteCenter {
+    top: 30%;
+  }
 }
