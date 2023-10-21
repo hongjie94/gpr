@@ -1,34 +1,21 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+<div style="text-align: center;">
+<h1>The League of Legends Stats Hub</h1>
+<img src="./src/img//heroIcon.png" alt="League of Legends wizard" width="200" height="200">
+</div>
 
-First, run the development server:
+The League of Legends Stats Hub, a web application designed for dedicated fans of the popular online multiplayer game, League of Legends. This platform was born out of a deep passion for the game, and its primary aim is to provide comprehensive information about teams and players, including game statistics and win rates.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+visit the website at [https://lolgpr.duckdns.org](https://lolgpr.duckdns.org) 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Tech Stack
+- **Next.js:** Foundation for fast page loads and optimal performance
+- **MongoDB:** Database system for storing and managing all data related to players, teams, and match results.
+- **Prisma:** Data access layer that provides a type-safe and auto-generated query API.
+- **GraphQL:** API technology, offering a flexible and efficient way to query and manipulate data.
+- **Nginx:** Web server and reverse proxy for managing incoming traffic and load balancing.
+- **shadcn/ui:** [Shadcn](https://ui.shadcn.com/) enhances user interface with beautiful design elements and components.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **Tailwind CSS:** A utility-first CSS framework that streamlines web development, enabling efficient styling and layout.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
