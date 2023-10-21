@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="dark:bg-gray-900 bg-slate-50 fixed w-screen h-screen z-20 font-fantasy">
+    <main className="dark:bg-gray-900 bg-slate-50 fixed w-screen h-screen z-20">
       <section className="bg-cover bg-center">
         <div className="absoluteCenter dark:opacity-90">
           <Image width={800} height={800} alt="bg" src={heroIcon} />

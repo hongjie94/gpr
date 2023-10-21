@@ -66,7 +66,7 @@ const TeamList: TeamListComponent = ({ teamList }) => {
                                   {player.handle} -{" "}
                                   {getRole(player.player_id, Roles).mainRole}
                                 </p>
-                                <p className="text-sm text-muted">
+                                <p className="text-sm font-light text-muted">
                                   {player.first_name} {player.last_name}
                                 </p>
                               </div>
