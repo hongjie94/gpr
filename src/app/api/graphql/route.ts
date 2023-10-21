@@ -4,6 +4,7 @@ import { PrismaClient } from '@prisma/client';
 import { prisma } from '../../../../prisma/db';
 import { resolvers } from '@/graphql/resolvers';
 import { typeDefs } from '@/graphql/schema';
+import { ApolloServerPluginLandingPageLocalDefault, ApolloServerPluginLandingPageProductionDefault } from '@apollo/server/plugin/landingPage/default';
 
 export type Context = {
   prisma: PrismaClient
@@ -12,6 +13,15 @@ export type Context = {
 const apolloServer = new ApolloServer<Context>({
   resolvers,
   typeDefs,
+  plugins: [
+    // Install a landing page plugin based on NODE_ENV
+    process.env.NODE_ENV === 'production'
+      ? ApolloServerPluginLandingPageProductionDefault({
+          graphRef: 'my-graph-id@my-graph-variant',
+          footer: false,
+        })
+      : ApolloServerPluginLandingPageLocalDefault({ footer: false }),
+  ],
 });
 
 const handler = startServerAndCreateNextHandler(apolloServer, {

@@ -8,7 +8,7 @@ import {
 
 export const ApolloProvider = ({ children }: { children: React.ReactNode }) => {
   const client = new ApolloClient({
-    uri: `https://main.d1w7480w3jclmw.amplifyapp.com/api/graphql?_rsc=acgkz`,
+    uri: `api/graphql/`,
     cache: new InMemoryCache(),
   });
   return <Provider client={client}>{children}</Provider>;
