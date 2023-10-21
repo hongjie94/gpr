@@ -11,14 +11,16 @@ import { Card, CardDescription, CardTitle } from "@/components/ui/card";
 import SkeletonLoader from "./SkeletonLoader";
 
 const Page: React.FC<Params> = ({ params: { id } }) => {
+
+  
   // Fetch league data from Apollo Client's useQuery
-  const { data, loading } = useQuery(GET_LEAGUE, {
+  const { data, loading, error } = useQuery(GET_LEAGUE, {
     variables: { id },
   });
-
+  if(error){console.log(error);}
   // Loading skeleton for loading data
   if (loading) return <SkeletonLoader />;
-
+  
   // Parse Zod
   const league = data.league;
   const zLeague = leagueSchema.parse(league);
