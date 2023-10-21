@@ -141,6 +141,13 @@ export const typeDefs = `#graphql
     teams: [_Game_team]
   }
 
+  type Role {
+    id: String
+    role:  String
+    player_id:  String
+    count:  Int
+  }
+
   type Query {
     leagues: [League]
     league(league_id: String):League
@@ -155,5 +162,6 @@ export const typeDefs = `#graphql
 
     players: [Player]
     player(player_id: String): Player
+    roles: [Role]
   }
 `;

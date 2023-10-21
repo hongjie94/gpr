@@ -51,19 +51,19 @@ const Rankings: RankingComponent = ({ section, TeamsMap, PlayersMap }) => {
       <div className="p-4 border border-stone-200 dark:border-stone-800 rounded-lg shadow">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ">
           {rankingsArr.map(
-            (rankingData, index) =>
+            (rankingData, i) =>
               rankingData.id != "0" && (
                 <div
-                  key={rankingData.id}
+                  key={i}
                   className="relative border border-stone-200 dark:border-stone-800 p-4 m-4 rounded-lg shadow"
                 >
                   <p className="text-lg font-semibold dark:text-[#E7CCA3]">
-                    Ordinal: {index + 1}
+                    Ordinal: {i + 1}
                   </p>
                   <div>
                     Team:
                     <Badge variant="outline" className="mx-2">
-                      {TeamsMap[rankingData.id].name}
+                      {TeamsMap[rankingData.id]?.name}
                     </Badge>
                   </div>
                   <p>Wins: {rankingData.record.wins}</p>
@@ -101,12 +101,12 @@ const Rankings: RankingComponent = ({ section, TeamsMap, PlayersMap }) => {
                             </tr>
                           </thead>
                           <tbody>
-                            {rankingData.players.map((player, index) => (
+                            {rankingData.players.map((player, i) => (
                               <>
                                 {PlayersMap[player.id] &&
                                   player.role !== "none" && (
                                     <tr
-                                      key={player.id}
+                                      key={i}
                                       className="m-0 border-t p-0 even:bg-muted"
                                     >
                                       <td className="border dark:text-[#D9C9A3] px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">

@@ -36,7 +36,7 @@ export function DataTableViewOptions<TData>({
         content = "Team";
         break;
       default:
-        content = "";
+        content = "Role";
         break;
     }
     return content;

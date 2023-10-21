@@ -41,13 +41,13 @@ const LeagueList = () => {
             <ImageSwitcher width={100} height={100} style="p-4" data={data} />
             <div>
               <CardHeader className="pb-2">
-                <CardTitle className="line-clamp-1">{data.name}</CardTitle>
-                <CardDescription className="line-clamp-1">
+                <CardTitle className="line-clamp-1 p-1">{data.name}</CardTitle>
+                <CardDescription className="line-clamp-1 p-1">
                   {data.region}
                 </CardDescription>
               </CardHeader>
               <CardFooter>
-                <p className="line-clamp-1">
+                <p className="line-clamp-1 p-1">
                 Priority {data.priority}
                 </p>
               </CardFooter>

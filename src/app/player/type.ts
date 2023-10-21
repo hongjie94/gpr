@@ -9,6 +9,12 @@ export const playerSchema = z.object({
   home_team_id: z.any().nullish(),
 })
 
+export const roleSchema = z.object({
+  player_id: z.string(),
+  role: z.string(),
+  count: z.number()
+});
+
 export const teamSchema = z.object({
   name: z.string(),
   acronym: z.string(),

@@ -13,8 +13,8 @@ export default function Page() {
   const { data, loading, error } = useQuery(GET_PLAYERS);
 
   // loader for loading and log error if error
-  if (loading) return <Loading />;
-  if (error) return console.log(error);
+  if (loading ) return <Loading />;
+  if (error ) return console.log(error);
 
   // Parse Zod
   const players = data.players;
@@ -22,9 +22,9 @@ export default function Page() {
 
   return (
     <>
-      <div className="h-full flex-1 flex-col space-y-8 p-8 md:flex container mb-20">
+      <div className="mb-20 min-h-screen flex-1 flex-col space-y-8 p-8 md:flex container">
         <div className="flex items-center justify-between space-y-2">
-          <header className=" px-1 my-8">
+          <header className=" px-1 my-8 font-fantasy">
             <h1 className="text-3xl font-bold mb-2">Player Directory</h1>
             <p className="text-muted">
               Get to know the players on your favorite teams!

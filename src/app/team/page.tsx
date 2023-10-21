@@ -33,7 +33,7 @@ export default function Page() {
   return (
     <div className="min-h-screen">
       <div className="container mx-auto py-8">
-        <header className="pb-4 px-1 my-8">
+        <header className="pb-4 px-1 my-8 font-fantasy">
           <h1 className="text-3xl font-bold mb-2">Teams</h1>
           <p className="text-muted">
             Get Acquainted with 673 Elite League of Legends Teams

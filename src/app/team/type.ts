@@ -2,6 +2,7 @@ import { FunctionComponent } from "react"
 import { z } from "zod";
 
 const playerSchema = z.object({
+  player_id: z.string(),
   handle: z.string(),
   last_name: z.string(),
   first_name: z.string(),
@@ -31,13 +32,21 @@ const gameTeamsSchema = z.object({
   side: z.string(),
 });
 
-const playedGamesTypeSchema = z.object({
+const playedGamesSchema = z.object({
   game_id: z.string(),
   teams: z.array(gameTeamsSchema),
 });
 
-export type PlayedGamesType = z.infer<typeof playedGamesTypeSchema>
+
+const roleSchema = z.object({
+  player_id: z.string(),
+  role: z.string(),
+  count: z.number()
+});
+
+export type PlayedGamesType = z.infer<typeof playedGamesSchema>
 export type TeamsType = z.infer<typeof teamSchema>
+export type RolesType = z.infer<typeof roleSchema>
 
 export type TeamListComponent = FunctionComponent<z.infer<typeof teamListComponentPropsSchema>>
 export type TeamGameStaticsComponent = FunctionComponent<z.infer<typeof teamGameStaticsComponentPropsSchema>>

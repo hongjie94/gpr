@@ -1,11 +1,13 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { Player, Team } from "../type";
+import { Player, Team, roleSchema } from "../type";
 import { DataTableColumnHeader } from "./data-table-column-header";
 import { useQuery as UQ } from "@apollo/client";
-import { GET_TEAM } from "../../../graphql/queries";
+import { GET_ROLES, GET_TEAM } from "../../../graphql/queries";
 import { ReloadIcon } from "@radix-ui/react-icons";
+import { z } from "zod";
+import getRole from "@/lib/getRole";
 
 import {
   Tooltip,
@@ -60,6 +62,32 @@ export const columns: ColumnDef<Player>[] = [
     },
   },
   {
+    accessorKey: "player_id",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Role" />
+    ),
+    cell: ({ row }) => {
+
+      const { data, loading, error} = UQ(GET_ROLES);
+      if(loading){return <>loading...</>}
+      if (error) return console.log(error);
+
+       // Parse Zod
+      const roles = data.roles;
+      const zRoles = z.array(roleSchema).parse(roles);
+
+      return (
+        <div className="flex items-center">
+          <span>{getRole(row.getValue("player_id"),zRoles).mainRole}</span>
+        </div>
+      );
+    },
+    enableSorting: false,
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id));
+    },
+  },
+  {
     accessorKey: "home_team_id",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Team" />
@@ -104,7 +132,6 @@ export const columns: ColumnDef<Player>[] = [
               </TooltipContent>}
             </Tooltip>
           </TooltipProvider>
-          <span></span>
         </div>
       );
     },
@@ -113,4 +140,5 @@ export const columns: ColumnDef<Player>[] = [
       return value.includes(row.getValue(id));
     },
   },
+ 
 ];

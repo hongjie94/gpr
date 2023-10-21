@@ -30,7 +30,7 @@ const Nav = () => {
   ];
 
   return (
-    <nav className="sticky top-0 z-20 flex items-center justify-between py-3 lg:px-16 shadow-lg dark:bg-stone-950 bg-zinc-100">
+    <nav className="font-fantasy sticky top-0 z-30 flex items-center justify-between py-1 lg:px-16 shadow-lg dark:bg-stone-950 bg-zinc-100">
       <div className="flex lg:flex-1">
         <Link href="/" >
           <Image

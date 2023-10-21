@@ -151,6 +151,7 @@ query Teams($take: Int, $skip: Int) {
     name
     acronym
     players {
+      player_id
       first_name
       last_name
       handle
@@ -165,6 +166,16 @@ export const GET_TEAM= gql`
     team_id
     name
     acronym
+  }
+}
+`;
+
+export const GET_ROLES= gql`
+query Roles {
+  roles {
+    role
+    player_id
+    count
   }
 }
 `;

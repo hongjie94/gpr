@@ -1,6 +1,6 @@
 "use client";
 
-import { TeamListComponent } from "./type";
+import { RolesType, TeamListComponent } from "./type";
 import playerIcon from "@/img/playerIcon.png";
 import { Card, CardDescription, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
@@ -11,8 +11,26 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import TeamGameStatics from "./TeamGameStatics";
+import { GET_ROLES } from "../../graphql/queries";
+import { useQuery } from "@apollo/client";
+import SkeletonLoader from "./SkeletonLoader";
+import getRole from "@/lib/getRole";
 
 const TeamList: TeamListComponent = ({ teamList }) => {
+  const { data, loading, error } = useQuery(GET_ROLES);
+
+  if (loading) {
+    return (
+      <>
+        <SkeletonLoader />
+      </>
+    );
+  }
+  if (error) {
+    console.log(error);
+  }
+  const Roles:RolesType[] = data.roles
+
   return (
     <>
       <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 mb-8">
@@ -44,10 +62,11 @@ const TeamList: TeamListComponent = ({ teamList }) => {
                                 />
                               </div>
                               <div className="ml-3">
-                                <p className="text-sm font-medium">
-                                  {player.handle}
+                                <p className="font-medium">
+                                  {player.handle} -{" "}
+                                  {getRole(player.player_id, Roles).mainRole}
                                 </p>
-                                <p className="text-xs text-muted">
+                                <p className="text-sm text-muted">
                                   {player.first_name} {player.last_name}
                                 </p>
                               </div>
@@ -63,7 +82,7 @@ const TeamList: TeamListComponent = ({ teamList }) => {
                             height={100}
                           ></Image>
                           <p className="text-sm  text-center">
-                            No players are currently listed on this LoL team.
+                            No players listed in the database.
                           </p>
                         </div>
                       )}

@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <>
       <html lang="en" suppressHydrationWarning>
-        <body className="font-sans" suppressHydrationWarning>
+        <body className="font-fantasy h-auto" suppressHydrationWarning>
           <ApolloProvider>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
               <Nav />

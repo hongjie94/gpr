@@ -19,6 +19,13 @@ model games{
   teams teams_teams []
 }
 
+model roles{
+  id String @id @map("_id") @db.ObjectId
+  role  String
+  player_id  String
+  count  Int
+}
+
 
 
 model leagues {

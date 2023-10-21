@@ -9,8 +9,6 @@
 }
 
 .goldWrapper {
-  padding: 0;
-  margin: 0;
   background-color: #0b1826;
 }
 .gold {
@@ -32,16 +30,18 @@
 
 .absoluteCenter {
   position: absolute;
-  top: 45%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
 }
 
-
-
 @media screen and (max-width: 775px) {
   .absoluteCenter {
     top: 30%;
   }
+}
+
+.font-fantasy {
+  font-family: fantasy;
 }

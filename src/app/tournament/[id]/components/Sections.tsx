@@ -55,7 +55,6 @@ TournamentPlayers.forEach((player) => {
   const { player_id, handle } = player;
   PlayersMap[player_id] = handle;
 });
-console.log(TournamentTeams)
   return (
     <>
       <Rankings section={section} TeamsMap={TeamsMap} PlayersMap={PlayersMap} />
