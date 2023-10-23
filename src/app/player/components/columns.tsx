@@ -93,6 +93,7 @@ export const columns: ColumnDef<Player>[] = [
       <DataTableColumnHeader column={column} title="Team" />
     ),
     cell: ({ row }) => {
+      
       const getTeamName = (id: string) => {
         const { data, loading } = UQ(GET_TEAM, {
           variables: { id },

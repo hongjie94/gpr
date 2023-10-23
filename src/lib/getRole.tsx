@@ -1,6 +1,7 @@
 import { RolesType } from '@/app/team/type';
 
 export default function getRole(id: string, array:RolesType[]){
+  
   const record = array.reduce((acc:any, item:any) => {
     const key = item.player_id;
     if (acc[key]) {

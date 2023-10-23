@@ -7,6 +7,7 @@ import { GET_TEAMS } from "../../graphql/queries";
 import { TeamsType } from "./type";
 import { Button } from "@/components/ui/button";
 import { ReloadIcon } from "@radix-ui/react-icons";
+import { Input } from "@/components/ui/input"
 
 export default function Page() {
   const [teamList, setTeamList] = useState<TeamsType[]>([]);
@@ -38,7 +39,14 @@ export default function Page() {
           <p className="text-muted">
             Get Acquainted with 673 Elite League of Legends Teams
           </p>
+          <div className=" mt-4 flex w-full max-w-sm items-center space-x-2">
+            <Input  type="text" placeholder="Filter Teams..."/>
+            <Button type="submit">Search</Button>
+          </div>
+       
+
         </header>
+
         <TeamList teamList={teamList} />
         <div className="w-100 flex justify-center mb-24 col-span-1 md:col-span-2 lg:col-span-2 xl:col-span-3 mt-2">
           <Button

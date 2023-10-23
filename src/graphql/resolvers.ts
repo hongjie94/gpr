@@ -70,7 +70,6 @@ export const resolvers = {
       return await context.prisma.teams.findMany({
         take: args.take,
         skip: args.skip,
-
       });
     },
 
